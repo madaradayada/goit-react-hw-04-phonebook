@@ -14,14 +14,14 @@ export function App() {
   ]);
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
+  useState(() => {
     const contacts = localStorage.getItem('contacts');
     const parsedСontacts = JSON.parse(contacts);
 
     if (parsedСontacts) {
       setContacts(parsedСontacts);
     }
-    return;
+    return [contacts, setContacts];
   }, []);
 
   useEffect(() => {
