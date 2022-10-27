@@ -49,12 +49,11 @@ export function App() {
     setContacts(contacts => [...contacts, newContact]);
   };
 
-  const getContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  };
+  const getContacts = contacts
+    .filter(contact => {
+      return contact.name.toLowerCase().includes(filter.toLowerCase());
+    })
+    .sort((f, s) => f.name.localeCompare(s.name));
 
   const deleteContact = contactId => {
     setContacts(contacts =>
@@ -63,10 +62,8 @@ export function App() {
   };
 
   const handleFilter = e => {
-    setFilter(e.currentTarget);
+    setFilter(e.currentTarget.value);
   };
-
-  const visibleContacts = getContacts();
 
   return (
     <Container>
@@ -77,10 +74,7 @@ export function App() {
       <Section title="Contacts">
         <TitleH2>Contacts</TitleH2>
         <Filter value={filter} onChange={handleFilter} />
-        <ContactList
-          contacts={visibleContacts}
-          onDeleteContact={deleteContact}
-        />
+        <ContactList contacts={getContacts} onDeleteContact={deleteContact} />
       </Section>
     </Container>
   );
