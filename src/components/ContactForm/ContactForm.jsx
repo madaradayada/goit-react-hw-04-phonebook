@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Form, Label, Input, Button } from './ContactFormStyled';
+import { nanoid } from 'nanoid';
 
 export function ContactForm({ onSubmit }) {
   const [name, setName] = useState('');
@@ -19,7 +20,11 @@ export function ContactForm({ onSubmit }) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    onSubmit({ name, number });
+    onSubmit({
+      id: nanoid(),
+      name: name,
+      number: number,
+    });
     setName('');
     setNumber('');
   };

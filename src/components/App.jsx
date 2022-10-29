@@ -11,7 +11,7 @@ export function App() {
   const [contacts, setContacts] = useLocaleStorage(initContacts);
   const [filter, setFilter] = useState('');
 
-  const addContact = ({ name, number }) => {
+  const addContact = ({ id, name, number }) => {
     const normalizedFind = name.toLowerCase();
     const findName = contacts.find(
       contact => contact.name.toLowerCase() === normalizedFind
@@ -25,7 +25,7 @@ export function App() {
       return alert(`This phone number is already in use.`);
     }
     const newContact = {
-      id: nanoid(),
+      id,
       name,
       number,
     };
