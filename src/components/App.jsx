@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
-import { Container, Section } from './AppStyled';
+import { Container, Section, Title } from './AppStyled';
 import { initContacts } from 'constants/contacts';
 import { useLocaleStorage } from './LocaleStorage/LocaleStorage';
 
@@ -50,11 +50,11 @@ export function App() {
   return (
     <Container>
       <Section title="Phonebook">
-        <h1>Phonebook</h1>
+        <Title font = '24'>Phonebook</Title>
         <ContactForm onSubmit={addContact} />
       </Section>
       <Section title="Contacts">
-        <h2>Contacts</h2>
+        <Title font = '20'>Contacts</Title>
         <Filter value={filter} onChange={handleFilter} />
         <ContactList contacts={getContacts} onDeleteContact={deleteContact} />
       </Section>

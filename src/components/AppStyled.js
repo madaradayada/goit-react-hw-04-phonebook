@@ -16,3 +16,9 @@ export const Section = styled.section`
   }
 `;
 
+
+export const Title = styled.h1`
+margin-bottom: 15px;
+font-size: ${props => props.font}px;
+font-weight: bold;
+`;
