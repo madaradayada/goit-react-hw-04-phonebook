@@ -1,32 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
-import { Container, Section, TitleH1, TitleH2 } from './AppStyled';
+import { Container, Section } from './AppStyled';
+import { initContacts } from 'constants/contacts';
+import { useLocaleStorage } from './LocaleStorage/LocaleStorage';
 
 export function App() {
-  const [contacts, setContacts] = useState([
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ]);
+  const [contacts, setContacts] = useLocaleStorage(initContacts);
   const [filter, setFilter] = useState('');
-
-  useState(() => {
-    const contacts = localStorage.getItem('contacts');
-    const parsedСontacts = JSON.parse(contacts);
-
-    if (parsedСontacts) {
-      setContacts(parsedСontacts);
-    }
-    return [contacts, setContacts];
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
 
   const addContact = ({ name, number }) => {
     const normalizedFind = name.toLowerCase();
@@ -68,11 +51,11 @@ export function App() {
   return (
     <Container>
       <Section title="Phonebook">
-        <TitleH1>Phonebook</TitleH1>
+        <h1>Phonebook</h1>
         <ContactForm onSubmit={addContact} />
       </Section>
       <Section title="Contacts">
-        <TitleH2>Contacts</TitleH2>
+        <h2>Contacts</h2>
         <Filter value={filter} onChange={handleFilter} />
         <ContactList contacts={getContacts} onDeleteContact={deleteContact} />
       </Section>

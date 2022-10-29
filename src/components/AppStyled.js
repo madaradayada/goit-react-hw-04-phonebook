@@ -16,14 +16,3 @@ export const Section = styled.section`
   }
 `;
 
-export const TitleH1 = styled.h1`
-  margin-bottom: 15px;
-  font-size: 32px;
-  font-weight: bold;
-`;
-
-export const TitleH2 = styled.h2`
-  margin-bottom: 15px;
-  font-size: 20px;
-  font-weight: bold;
-`;
